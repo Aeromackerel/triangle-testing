@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Point.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">testing</a> &gt; <a href="index.source.html" class="el_package">practiceProject</a> &gt; <span class="el_source">Point.java</span></div><h1>Point.java</h1><pre class="source lang-java linenums">package practiceProject;
+
+import java.util.Arrays;
+
+public class Point extends Triangle{
+	
+	// Field variables
+	
+	double x,y;
+	
+	// Constructors - Default and overloaded
+	
+<span class="nc" id="L13">	public Point () {}</span>
+<span class="fc" id="L14">	public Point (double xIn, double yIn) {x = xIn; y = yIn;}</span>
+	
+	// Helper method to convert points to doubles -&gt; Triangle
+	
+	public void euclidDistSquare(Point [] pointArrayIn)
+	{
+<span class="fc" id="L20">		 this.sideArray[0] = Math.sqrt(Math.pow((pointArrayIn[0].x - pointArrayIn[1].x),2) + Math.pow((pointArrayIn[0].y - pointArrayIn[1].y),2));</span>
+<span class="fc" id="L21">		 this.sideArray[1] = Math.sqrt(Math.pow((pointArrayIn[0].x - pointArrayIn[2].x),2) + Math.pow((pointArrayIn[0].y - pointArrayIn[2].y),2));</span>
+<span class="fc" id="L22">		 this.sideArray[2] = Math.sqrt(Math.pow((pointArrayIn[1].x - pointArrayIn[2].x),2) + Math.pow((pointArrayIn[1].y - pointArrayIn[2].y),2));</span>
+		 
+		 // Sort to ensure that the user can enter points in any order
+		 
+<span class="fc" id="L26">		 Arrays.sort(this.sideArray);</span>
+		 
+<span class="fc" id="L28">		 System.out.println(&quot;The following side lengths are : &quot;);</span>
+		 
+<span class="fc bfc" id="L30" title="All 2 branches covered.">		 for (double side : this.sideArray)</span>
+<span class="fc" id="L31">			 System.out.println(side);</span>
+		 	 
+		 // Calls triangle's method since we already stored sorted double array into Triangle object
+		 
+<span class="fc" id="L35">		 this.classifyDoubles();</span>
+<span class="fc" id="L36">	}</span>
+	
+
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

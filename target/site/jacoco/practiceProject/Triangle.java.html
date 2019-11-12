@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Triangle.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">testing</a> &gt; <a href="index.source.html" class="el_package">practiceProject</a> &gt; <span class="el_source">Triangle.java</span></div><h1>Triangle.java</h1><pre class="source lang-java linenums">package practiceProject;
+
+import java.util.Arrays;
+
+class Triangle
+{
+	// Field properties
+	
+<span class="fc" id="L9">	double [] sideArray = new double [3];</span>
+	String rightClass, sideClass;
+	
+	public Triangle()
+<span class="fc" id="L13">	{System.out.println(&quot;Created a triangle Object&quot;);}</span>
+	
+	// General function used in static main
+	
+	public void classifyDoubles (double [] doubleArray)
+	{
+		boolean validity;
+			
+		// Sort to allow for the user to enter input in any possible combination
+		
+<span class="fc" id="L23">		Arrays.sort(doubleArray);</span>
+		
+		// Copy double array to object's field array
+		
+<span class="fc" id="L27">		this.sideArray = doubleArray.clone();</span>
+		
+<span class="fc" id="L29">		validity = checkValidity();</span>
+		
+//		if(validity == false)
+//		{
+//			System.out.println(&quot;Triangle is not valid - System terminating&quot;);
+////			System.exit(1);
+//		}
+<span class="fc bfc" id="L36" title="All 2 branches covered.">		if (validity == true)</span>
+		{
+			// Pass back into Triangle's methods to classify the type of Triangle it is
+			
+<span class="fc" id="L40">			this.isRightTriangle();</span>
+<span class="fc" id="L41">			this.sideClassification();</span>
+			
+<span class="fc" id="L43">			System.out.println(&quot;Triangle is a &quot; + this.rightClass + this.sideClass + &quot; triangle&quot;);</span>
+<span class="fc" id="L44">			System.out.println(&quot;Area of the triangle : &quot; + getArea());</span>
+		}
+		
+<span class="fc" id="L47">	}</span>
+	
+	// Same function as above, but used if we already have the double Array sorted and saved in the object
+	
+	public void classifyDoubles ()
+	{
+		boolean validity;
+		
+<span class="fc" id="L55">		validity = checkValidity();</span>
+		
+//		if(validity == false)
+//		{
+//			System.out.println(&quot;Triangle is not valid - System terminating&quot;);
+////			System.exit(1);
+//		}
+		
+		// Pass back into Triangle's methods to classify the type of Triangle it is
+<span class="fc" id="L64">			this.isRightTriangle();</span>
+<span class="fc" id="L65">			this.sideClassification();</span>
+			
+<span class="fc" id="L67">			System.out.println(&quot;Triangle is a &quot; + this.rightClass + this.sideClass + &quot; triangle&quot;);</span>
+<span class="fc" id="L68">			System.out.println(&quot;Area of the triangle : &quot; + getArea());</span>
+		
+<span class="fc" id="L70">	}</span>
+	
+	/* Helper functions within the class */
+	
+	// Determines whether or not the triangle is a right triangle
+	
+	protected void isRightTriangle()
+	{
+<span class="fc bfc" id="L78" title="All 2 branches covered.">		if (Math.abs(Math.pow(this.sideArray[0], 2) + Math.pow(this.sideArray[1], 2) - Math.pow(this.sideArray[2], 2)) &lt; 0.01)</span>
+<span class="fc" id="L79">		{this.rightClass = &quot;Right &quot;;}</span>
+		else
+<span class="fc" id="L81">		{this.rightClass = &quot;&quot;;}</span>
+<span class="fc" id="L82">	}</span>
+	
+	// Gives the classification of the triangle
+	
+	protected void sideClassification()
+	{
+<span class="fc bfc" id="L88" title="All 4 branches covered.">		if (this.sideArray[0] == this.sideArray[1] &amp;&amp; this.sideArray[1] == this.sideArray[2])</span>
+<span class="fc" id="L89">			this.sideClass = &quot;Equilateral&quot;;</span>
+		
+<span class="pc bpc" id="L91" title="1 of 4 branches missed.">		else if (this.sideArray[0] == this.sideArray[1] || this.sideArray[1] == this.sideArray[2])</span>
+<span class="fc" id="L92">			this.sideClass = &quot;Isoceles&quot;;</span>
+		
+		else
+<span class="fc" id="L95">			this.sideClass = &quot;Scalene&quot;;</span>
+<span class="fc" id="L96">	}</span>
+	
+	// Checks validity of the Triangle
+	
+	protected boolean checkValidity ()
+	{
+<span class="fc bfc" id="L102" title="All 2 branches covered.">		if (this.sideArray[0] + this.sideArray[1] &lt;= this.sideArray[2])</span>
+<span class="fc" id="L103">			{return false;}</span>
+		else
+<span class="fc" id="L105">			{return true;}</span>
+	}
+	
+	// Gives us the area of the Triangle - equation from Assignment 2 PDF
+	
+	protected double getArea ()
+	{
+		double semiPerimeter;
+		
+<span class="fc" id="L114">		semiPerimeter = (this.sideArray[0] + this.sideArray[1] + this.sideArray[2]) / 2;</span>
+		
+<span class="fc" id="L116">		return Math.sqrt(semiPerimeter*(semiPerimeter-this.sideArray[0])*(semiPerimeter-this.sideArray[1])*(semiPerimeter-this.sideArray[2]));</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

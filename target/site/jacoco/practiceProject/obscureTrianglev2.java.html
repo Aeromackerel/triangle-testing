@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>obscureTrianglev2.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">testing</a> &gt; <a href="index.source.html" class="el_package">practiceProject</a> &gt; <span class="el_source">obscureTrianglev2.java</span></div><h1>obscureTrianglev2.java</h1><pre class="source lang-java linenums">package practiceProject;
+
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.InputMismatchException;
+
+/* Helper Classes  in separate files */
+
+public class obscureTrianglev2 
+{
+<span class="fc" id="L11">	Point [] pointArray = new Point[3];</span>
+	
+	// Constructors for JUnit testcases
+	
+<span class="fc" id="L15">	public obscureTrianglev2() {}	</span>
+	
+	/*Helper Functions */
+	
+	// Converts the input String Array to an array of 3 Points
+	
+	public Point [] stringToPointArray (String [] stringIn)
+	{
+		// Holder variable for parsing the ordered pairs
+		
+<span class="fc" id="L25">		String [] temp = new String [2];	</span>
+<span class="fc" id="L26">		Point [] pointArray = new Point[3];</span>
+
+		double xCoord, yCoord;
+		
+<span class="fc bfc" id="L30" title="All 2 branches covered.">		for (int i = 0; i &lt; stringIn.length; i++)</span>
+			{
+<span class="fc" id="L32">				stringIn[i] = stringIn[i].replaceAll(&quot;[()]&quot;, &quot;&quot;);</span>
+<span class="fc" id="L33">				temp = stringIn[i].split(&quot;,&quot;);</span>
+				
+<span class="fc" id="L35">					xCoord = Double.parseDouble(temp[0]);</span>
+<span class="fc" id="L36">					yCoord = Double.parseDouble(temp[1]);</span>
+<span class="fc" id="L37">					pointArray[i] = new Point(xCoord, yCoord);</span>
+//				catch (Exception e)
+//				{
+//					System.out.println(&quot;Incorrect data type entered. Please enter in a positive integer or Double value in the following manner (x,y) where x and y&quot;
+//							+ &quot; are the integers/Doubles. System terminating&quot;);
+//					System.exit(1);
+//				}
+//				
+			}
+		
+<span class="fc" id="L47">		System.out.println(&quot;&lt;-------- Above this line three points were constructed -----------&gt;&quot;);</span>
+		
+<span class="fc" id="L49">		return pointArray;</span>
+	}
+	
+	public void triangleOption(char charIn, String [] stringArray) throws InputException
+	{
+<span class="fc bfc" id="L54" title="All 2 branches covered.">		if (charIn == 'P')</span>
+		{
+<span class="fc" id="L56">			this.pointArray = this.stringToPointArray(stringArray);</span>
+<span class="fc" id="L57">			this.pointArray[0].euclidDistSquare(this.pointArray);</span>
+		}
+		
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">		else if (charIn == 'S')</span>
+		{
+<span class="fc" id="L62">			double [] tempHolderArray = new double[3];</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">			for (int i = 0; i &lt; 3; i++)</span>
+			{
+<span class="fc" id="L65">				tempHolderArray[i] = Double.parseDouble(stringArray[i]);</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">				if (tempHolderArray[i] &lt; 0)</span>
+<span class="fc" id="L67">					System.out.println(&quot;Negative value&quot;);</span>
+			}
+<span class="fc" id="L69">			Triangle newTriangle = new Triangle();</span>
+<span class="fc" id="L70">			newTriangle.classifyDoubles(tempHolderArray);</span>
+		}
+<span class="fc" id="L72">	}</span>
+	
+	public static void main (String [] args)
+	{
+//		Scanner scanIn = new Scanner(System.in);
+//		
+//		obscureTrianglev2 triangleGod = new obscureTrianglev2();
+//		
+//		System.out.println(&quot;Please pick between entering side lengths or the three points of a triangle - Use S for side lengths and P for points&quot;);
+//		
+//		char typeInput = scanIn.next().charAt(0);
+//		
+//		if (typeInput == 'P')
+//		{
+//			String [] orderedPairArray = new String [3];
+//			
+//			System.out.println(&quot;Please enter your points in this format (8,9) three times and press enter for each unique pair&quot;);
+//			System.out.println(&quot;Please note that if you have a 4 digit number (or larger) print it WITHOUT commas -&gt; 1000&quot;);
+//			
+//			for (int i = 0; i &lt; 3 ; i++)
+//				orderedPairArray[i] = scanIn.next();
+//			
+//			scanIn.close();
+//			
+//			triangleGod.pointArray = triangleGod.stringToPointArray(orderedPairArray);
+//						
+//			triangleGod.pointArray[0].euclidDistSquare(triangleGod.pointArray);
+//			
+//			
+//		}
+//		
+//		else if (typeInput == 'S')
+//		{	
+//			
+//			System.out.println(&quot;Please enter your side lengths three times and press enter for each side.&quot;);
+//			double [] tempHolderArray = new double [3];
+//			
+//			// Try and catch block for input errors
+//			try {
+//			
+//			for (int i = 0; i &lt; 3; i++)
+//				{
+//					tempHolderArray[i] = Double.parseDouble(scanIn.next());
+//					
+//					if (tempHolderArray[i] &lt; 0)
+//						throw new InputException (&quot;Incorrect side length entered, please enter a positive integer or Double value - System terminated.&quot;);
+//				}
+//			}
+//			
+//			catch (InputException e)
+//			{
+//				System.out.println(e.getMessage());
+//				System.exit(1);
+//			}
+//			catch (Exception e)
+//			{
+//				System.out.println(&quot;Unknown error caught - System terminating&quot;);
+//				System.exit(1);
+//			}
+//			
+//			scanIn.close();
+//			
+//			Triangle newTriangle = new Triangle();
+//			
+//			newTriangle.classifyDoubles(tempHolderArray);
+//			
+//		}
+//		
+//		else
+//		{
+//			System.out.println(&quot;Incorrect input - exitting program&quot;);
+//			scanIn.close();
+//			System.exit(0);
+//		}
+//		
+<span class="nc" id="L147">	}</span>
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
